@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .topDiv {
+
+            border: 2px solid black;
+
+        }
+        .clearfix:after{
+            display: block;
+            height: 0;
+            clear: both;
+            content: '';
+            visibility: hidden;
+        }
+        .floatDiv {
+            width: 100px;
+            height: 100px;
+            border: 2px dotted red;
+            background-color: red;
+            color: red;
+            margin: 4px;
+            float: left;
+        }
+        .bottomDiv {
+            background-color: orange;
+            width: 500px;
+            height: 100px;
+            margin: 5px 0;
+            border: 2px dotted black;
+        }
+        .textDiv {
+            float: left;
+            background-color: #42b983;
+            color: blue;
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body>
+<div style="width: 100px ;height: 100px;background-color: #42b983;float: left">浮动元素</div>
+    <div style="width: 200px;height: 200px;border: 2px solid #cccccc;background: red;overflow:hidden;position: relative">
+    <img style="width: 100px;height: 100px;position: absolute;z-index: -1" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606558804985&di=02d19a392762411fa44f65b3fd08295e&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100720%2F3650425_110105686549_2.jpg" alt="">
+</div>
+<div id="shadow"></div>
+<input type="text" id="input1">
+
+<script type="text/javascript">
+        let shadowDOM =shadow.attachShadow({mode:'closed'})
+    let pElem = document.createElement('p')
+    pElem.innerText= '123'
+    let styleElem = document.createElement('style')
+    styleElem.textContent = `p{color:red}`
+    shadowDOM.appendChild(styleElem)
+    shadowDOM.appendChild(pElem)
+
+    document.body.appendChild(pElem)
+</script>
+
+<!--<script>-->
+<!--    const input = document.getElementById('input1');-->
+
+<!--    /**-->
+<!--     * 防抖-->
+<!--     *假设输入123-->
+<!--     * 当连续输入123时候只要间隔不超过1s，重启定时器，当间隔到达1s，执行打印结果。-->
+<!--     * @type {null}-->
+<!--     */-->
+<!--    let timer = null;-->
+<!--    input.addEventListener('keyup',function () {-->
+<!--        if(timer) clearInterval(timer)-->
+<!--        timer = setTimeout(function () {-->
+<!--            console.log(input.value)-->
+<!--            timer = null;-->
+<!--        },1000)-->
+
+<!--    });-->
+
+<!--    function debounce(fn,delay = 1000) {-->
+<!--        let timer = null-->
+<!--        return function () {-->
+<!--            if(timer) clearInterval(timer)-->
+<!--            timer = setTimeout(function () {-->
+<!--                timer = null-->
+<!--                fn.apply(this,arguments)-->
+<!--            },delay)-->
+<!--        }-->
+<!--    }-->
+
+<!--</script>-->
+
+<script>
+    function *f() {
+        alert('111');
+        yield;
+    }
+    const a =  f();
+    console.log(a)//yield返回generator对象
+</script>
+</body>
+</html>

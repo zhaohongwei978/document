@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .border-1px-top:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-top: 1px solid red;
+        transform: scaleY(.5);
+        transform-origin: left top;
+    }
+
+</style>
+<body>
+    <div class="border-1px-top"> cell <div>
+</body>
+</html>
