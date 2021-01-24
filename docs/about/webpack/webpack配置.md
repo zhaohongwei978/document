@@ -76,6 +76,47 @@ module.exports ={
 
 ```
 
+
+## loader相关 
+
+### 常用loader
+
+|  loader名   | 作用  |
+|  ----  | ----  |
+| babel-loader  | 转换es6 es7 |
+| css-loader  | 支持css文件加载和解析 |
+| scss-loader  | 把scss转换为css |
+| ts-loader  | 把ts转换为js |
+| file-loader  | 文件字体相关处理 |
+| thread-loader  | 多线程打包 |
+| raw-loader  | 将文件以字符串形式导入 |
+
+
+## plugins相关 
+
+plugins作用于整个构建过程。用于bundle文件的优化，资源管理以及环境变量的注入等。
+### 常用plugins
+
+|  plugins名   | 作用  |
+|  ----  | ----  |
+| commonChunkPlugin  | 将chunks相同的代码模块提取到公共 |
+| clearWebpackPlugin  | 清理dist目录 |
+| UglifyWebpackPlugin  | 压缩js |
+| HtmlWebpackPlugin  | 创建HTML结构并引入bundle |
+| ZipWebpackPlugin  | 将打包后的文件压缩为zip |
+| thread-loader  | 多线程打包 |
+| ExtractTextWebpackPlugin  | 将css从bundle里提取出成为一个独立的css文件 |
+｜
+
+## Mode内置函数
+
+通过 process.en.NODE_ENV值为development/production
+
+| 模式  | 描述 |
+| ---  | ---  |
+| developement  | 会开启NamedChunksPlugin 和 NameModulesPlugin  |
+| production  | 会开启FlagDependencyUsagePlugin，FlagIncluedChunksPlugin，ModuleConcatenationPlugin，NoEmitOnErrorsPlugin，OccurrenceOrderPlugin，SideEffectsFlagPlugin 和 TerserPlugin  |
+| none  | 不开启任何优化  |
 ## 简单webpack从0搭建
 
 package.json
