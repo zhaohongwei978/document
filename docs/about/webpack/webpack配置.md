@@ -91,6 +91,63 @@ module.exports ={
 | thread-loader  | 多线程打包 |
 | raw-loader  | 将文件以字符串形式导入 |
 
+### babel-loader的使用 
+
+通过该方式就可以对es6语法进行支持
+
+1 npm install  @babel/core @babel/preset-env babel-lader -d
+
+2 配置.babellrc文件
+
+```
+{
+    "presets": ["@babel/preset-env"],
+    "plugins": ["@babel/proposal-class-properties"]
+}
+```
+
+3 babel-loader配置
+
+```
+module:{
+    rules:[{
+        test: /.js$/,
+        use: 'babel-loader'
+    }]
+}
+```
+4 babel增加对 react的支持
+
+```
+// 1 npm i react react-dom @babel/preset-react -d
+
+// 2 .babellrc中增加对react的babel
+
+{
+    "presets": ["@babel/preset-env","@babel/preset-react"],
+    "plugins": ["@babel/proposal-class-properties"]
+}
+
+// 3 在要build的文件中增加一段react结构
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+class Index extends React.Component{
+     render(){
+         return <div>121212</div>
+     }
+}
+
+ReactDOM.render(
+    <Index/>,
+    document.getElementById('app')
+)
+
+
+
+
+```
 
 ## plugins相关 
 
@@ -106,7 +163,6 @@ plugins作用于整个构建过程。用于bundle文件的优化，资源管理�
 | ZipWebpackPlugin  | 将打包后的文件压缩为zip |
 | thread-loader  | 多线程打包 |
 | ExtractTextWebpackPlugin  | 将css从bundle里提取出成为一个独立的css文件 |
-｜
 
 ## Mode内置函数
 
@@ -117,6 +173,9 @@ plugins作用于整个构建过程。用于bundle文件的优化，资源管理�
 | developement  | 会开启NamedChunksPlugin 和 NameModulesPlugin  |
 | production  | 会开启FlagDependencyUsagePlugin，FlagIncluedChunksPlugin，ModuleConcatenationPlugin，NoEmitOnErrorsPlugin，OccurrenceOrderPlugin，SideEffectsFlagPlugin 和 TerserPlugin  |
 | none  | 不开启任何优化  |
+
+
+## 
 ## 简单webpack从0搭建
 
 package.json
