@@ -144,8 +144,43 @@ ReactDOM.render(
     document.getElementById('app')
 )
 
+```
+### css-loader相关处理
 
+作用
 
+- css-loader 用于加载.css文件，并转换为commonjs对象
+- style-loader 将css插入到head中
+
+- 1 npm i style-loader css-loader -d
+- 2 loader解析scss
+
+```
+module:{
+        rules:[{
+            test: /.js$/,
+            use: 'babel-loader'
+        },{
+            test: /.css$/,
+            use: ['style-loader','css-loader']
+        },{
+            test: /.scss$/,
+            use: ['style-loader','css-loader','sass-loader']
+        }]
+    }
+```
+### file-loader相关
+
+- 通过使用file-loader可以解析 png jpg gif svg等的解析。
+
+使用过程 
+- 通过npm i file-loader -d 安装file-loader 
+- file-loader配置
+```
+{
+    test:/.(png|jpg|gif|jpeg|svg)$/,
+    use:'file-loader'
+}
 
 ```
 
