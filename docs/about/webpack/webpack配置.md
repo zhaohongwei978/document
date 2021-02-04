@@ -171,11 +171,14 @@ module:{
 ```
 ### file-loader相关
 
-- 通过使用file-loader可以解析 png jpg gif svg等的解析。
+- 通过使用file-loader可以解析 png jpg gif svg等的解析。用file-loader打包的图片会给每张图片都生成一个随机的hash值作为图片的名字
 
 使用过程 
 - 通过npm i file-loader -d 安装file-loader 
 - file-loader配置
+- file-loader的常用配置项：
+name配置项是配置打包生成的文件的名字，使用的是placeholder语法， [name]   表示的是原文件的名字；[hash]  表示的是这次打包的hash值   [ext]表示的是原文件的后缀；
+
 ```
 {
     test:/.(png|jpg|gif|jpeg|svg)$/,
@@ -183,7 +186,6 @@ module:{
 }
 
 ```
-
 ## plugins相关 
 
 plugins作用于整个构建过程。用于bundle文件的优化，资源管理以及环境变量的注入等。
@@ -199,6 +201,107 @@ plugins作用于整个构建过程。用于bundle文件的优化，资源管理�
 | thread-loader  | 多线程打包 |
 | ExtractTextWebpackPlugin  | 将css从bundle里提取出成为一个独立的css文件 |
 
+### 热更新相关问题
+
+- 方法1 通过watch参数配置更新（使用该方式需要每次修改完配置之后都需要刷新页面）
+ 
+```
+// 启动webpack 设置--watch 或者 在webpack.config.js中设置watch
+
+scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch",//增加watch 参数
+    "dev": "webpack-dev-server --open"
+}
+```
+
+
+- 方法2  webpack-dev-server热更新
+    - 不需要刷新浏览器。
+    - 不需要输出文件，放在内存中。
+    - 可以使用HotModuleReplacementPlugin(webpack自带)
+    - 要将mode模式改为development
+
+使用
+
+- 1 安装 sudo npm install webpack-dev-server -g
+- 2 配置package.json 
+
+```
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch",
+    "dev": "webpack-dev-server --open"
+ },
+
+```
+
+- 3 webpack.config.js配置
+```
+//
+module.exports ={
+    entry:{
+        file1:'./src/index.js',
+    },
+    output: {
+        path:path.join(__dirname,'dist'),
+        filename:'[name].js'
+    },
+    mode:'development',
+    module:{
+        rules:[{
+            test:/.(png|jpg|gif|jpeg|svg)$/,
+            use:'file-loader'
+         }]
+    },
+    plugins:[
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    devServer:{
+        contentBase:'./dist',
+        hot:true
+    }
+}
+```
+### sliptChunksPlugin进行公共脚本分离
+
+
+## 文件指纹
+
+- hash跟整个项目的构建相关，只要项目有修改，整个项目构建的hash就会发生改变。
+- chunkhash 和webpack打包 的chunk有关，不同的entry对应的chunk不一样。
+- contenthash 根据文件内容定义hash，内容不同hash值不同。
+
+## HTML CSS JS压缩
+
+- webpack内置uglifyjs-webpack-plugin
+
+(由于浏览器在生产环境默认开启了uglifyjs-webpack-plugin，js会被自动压缩)
+
+- optimize-css-assets-webpack-plugin + cssnano
+
+用来压缩css
+```
+//第一步导入相关资源
+npm i  optimize-css-assets-webpack-plugin -d
+npm i cssnano -d 
+//引入资源+配置，即可以把css压缩
+const optimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin') 
+
+plugins:[
+    new optimizeCssAssetsPlugin({
+        assetNameRegExp:/\.css$/g,
+        cssProcessor:require('cssnano')
+    })
+],
+```
+- 设置html-webpack-plugin设置压缩参数，压缩html文档
+
+```
+npm i html-webpack-plugin -d
+
+```
+
 ## Mode内置函数
 
 通过 process.en.NODE_ENV值为development/production
@@ -210,7 +313,9 @@ plugins作用于整个构建过程。用于bundle文件的优化，资源管理�
 | none  | 不开启任何优化  |
 
 
-## 
+## source map
+
+source map设置等级，可以方便开发环境的调试。
 ## 简单webpack从0搭建
 
 package.json
