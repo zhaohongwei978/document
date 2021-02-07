@@ -82,7 +82,7 @@ module.exports = {
             'React',
             'Wepback',
             'Http',
-            '常见考点',
+            // '常见考点',
             '性能优化',
           )
         }
@@ -132,7 +132,7 @@ function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,g
     {
       title: groupE,
       collapsable: true,
-      children: ['/about/webpack/webpack配置',]
+      children: ['/about/react/react',]
     },
     {
       title: groupF,
@@ -144,11 +144,11 @@ function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,g
       collapsable: true,
       children: [ '/about/http/HTTP基础知识', '/about/http/缓存','/about/http/web安全']
     },
-    {
-      title: groupH,
-      collapsable: true,
-      children: ['/about/question/vue','/about/question/js','/about/question/移动端问题']
-    },
+    // {
+    //   title: groupH,
+    //   collapsable: true,
+    //   children: ['/about/question/vue','/about/question/js','/about/question/移动端问题']
+    // },
     {
       title: groupI,
       collapsable: true,
