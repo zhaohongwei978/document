@@ -1,5 +1,7 @@
 # new 的过程
 
+new 在执行的过程中，如果有return 即返回return的内容，如果没有return 返回的是this实例。
+
 - 1 创建空对象
 - 2this 指向新对象，执行构造函数的代码。
 - 3 设置原型链，新对象**proto** 指向构造函数的 prototype
