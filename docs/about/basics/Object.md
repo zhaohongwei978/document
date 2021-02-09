@@ -14,11 +14,19 @@ Object.create(proto, [propertiesObject])
 ```angular2html
 let a = Object.create({name:'kira',info:{value:'111'}})
 
-console.log(a) //{info:'111'}
-console.log(a.__proto__) //打印结果{name:'kira'}
+console.log(a) // {}
+console.log(a.__proto__) //打印结果{name:'kira'},info:{value:'111'}}
 console.log(a.__proto__.__proto__) //打印结果是Object的内容
 
+//利用Object.create的第二个参数，给创建的新对象增加属性
 
+let obj = {name:1}
+//新增加的属性必须有enumerable属性，不然在新创建的对象上找不到。
+let c = Object.create(obj,{age: { value: 24,enumerable: true,}})
+
+console.log(c) // {age:24}
+console.log(c.__proto__) // {name:1}
+console.log(c.__proto__.__proto__) // {name:1}
 
 
 
