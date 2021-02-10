@@ -1,4 +1,4 @@
-# nextTick 实现
+# $nextTick相关
 
 - 1 数据发生变化，触发 setter
 - 2 dep.notice()触发 dep 下的 weather
@@ -6,12 +6,15 @@
 - 4 将一个观察者对象 weather,push 进 queue 队列，在 queue 队列中已经存在相同的 id 则该观察者对象 weather 将被跳过.利用 hash 的 map 结构 对 weather 去重，防止相同的 weather 被重复添加到 queue 中。
 - 6 nextTick 利用事件循环，在一下次 tick 时，flushSchedulerQueue 执行所有 queue 队列中的 weather，更新视图。
 
-## nextTick 的表现？
+## 什么时候会使用到nextTick？
 
-打印的结果是 begin，为什么我们明明已经将 test 设置成了“end”,获取真实 DOM 节点的 innerText 却没有得到我们预期中的“end”，可见该操作是异步的。
+vue在 beforeCreate，created阶段主要完成初始化的操作，但如果我们在初始化的阶段来获取DOM此时DOM 其实并未进行任何渲染，所以一定要把DOM相关的操作放在nextTick中。
+
+如果是mounted阶段，vue已经挂载和渲染完成，所以此时获取DOM是可以拿到的。
 
 ```
 <template>
+//打印的结果是 begin，为什么我们明明已经将 test 设置成了“end”,获取真实 DOM 节点的 innerText 却没有得到我们预期中的“end”，可见该操作是异步的。
   <div>
     <div ref="test">{{test}}</div>
     <button @click="handleClick">tet</button>

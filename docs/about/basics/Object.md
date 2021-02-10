@@ -49,7 +49,26 @@ var myObject = Object.create( anotherObject );
 myObject.a; // 2 实际上就是把a:2 挂载到了myObject上
 ```
 
+### Object.create 一些问题
 
+```
+const fatherObj = {name:'father',age:20}
+let obj = Object.create(fatherObj,{test:{value:1,enumerable:true,writable:true}})
+console.log(obj)//{test:1}
+console.log(obj.__proto__) //{ name: 'father', age: 20 }
+
+obj.test++;
+console.log(obj)//{test:2}
+
+obj.age++;
+console.log(obj)//test:2,age:21}
+console.log(obj.__proto__) //{ name: 'father', age: 20 }
+
+//fatherObj.age = 33;
+console.log(obj)//test:2,age:21}
+console.log(obj.__proto__) //{ name: 'father', age: 33 }
+
+```
 ## Object.assign 的用法
 
 Object.assign 可以实现对象的合并。Object.assign(target, ...sources)
