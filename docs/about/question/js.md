@@ -1,4 +1,15 @@
 # js 问题
+## querySelector() 和 getElementByXX 的区别?
+
+ - getElementByXX是动态获取，获取的到的内容如果发生改变，通过变量可以读到改变后的结果（比querysecletor更快）
+ 
+ var a = getElementByTagName(div);(HTMLColection)
+
+ - querySector相当于获取的是一个快照，如果修改内容，通过b不能获取到修改之后的结果。
+
+ var b = querySector('a');(NotdeType)
+
+
 
 ## underfind 和 null 的区别?
 
