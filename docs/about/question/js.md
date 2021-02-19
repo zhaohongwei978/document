@@ -1,4 +1,50 @@
 # js 问题
+
+
+## 统计字符串中出现最多自符的数量，以及下标志
+
+```
+let str= 'ssssdfasdada'
+function  fn(str){
+    let strArr = str.split('');
+    console.log(strArr)
+    let has = {};
+    for (let i =0;i<strArr.length;i++){
+        if(has.hasOwnProperty(strArr[i])){
+            has[strArr[i]]++;
+        }else{
+            has[strArr[i]] = 1;
+        }
+    }
+    let maxName = ''
+    let maxValue = 0;
+    for (let key in has){
+        if(has[key]>maxValue){
+            maxValue = has[key]
+            maxName = key
+        }
+    }
+    console.log('---maxName',maxName)
+    console.log('---maxValue',maxValue)
+}
+fn(str)
+
+```
+
+## 左边旋转字符串
+
+```
+console.log(fn('dagasfadawd',2))
+
+function fn(str,n){
+    let left = str.slice(0,n);
+    let right = str.slice(2,str.length);
+    return right + left
+    //gasfadawdda
+}
+
+```
+
 ## querySelector() 和 getElementByXX 的区别?
 
  - getElementByXX是动态获取，获取的到的内容如果发生改变，通过变量可以读到改变后的结果（比querysecletor更快）
