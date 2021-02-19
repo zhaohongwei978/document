@@ -391,7 +391,7 @@ process.nextTick(function tick () {
 ```
 
 
-## promise.all()
+## promise.all()使用
 
 Promise.all获得的成功结果的数组里面的数据顺序和Promise.all接收到的数组顺序是一致的即p1的结果在前，即便p1的结果获取的比p2要晚。这带来了一个绝大的好处：在前端开发请求数据的过程中，偶尔会遇到发送多个请求并根据请求顺序获取和使用数据的场景，使用Promise.all毫无疑问可以解决这个问题。
                                               
@@ -415,6 +415,35 @@ Promise.all([p1, p2]).then((result) => {
 }).catch((error) => {
     console.log('err',error)
 })
+```
+## promise.all()实现
+
+```
+Promise.myAll = function (promiseArr){
+    return new Promise((resolve, reject) => {
+        let len = promiseArr.length;
+        let result = new Array(len);
+        let count = 0;
+        for (let i=0;i<promiseArr.length;i++){
+            Promise.resolve(promiseArr[i]).then((res)=>{
+                count ++;
+                result[i] = res;
+                if(len ===count){
+                    return resolve(result)
+                }
+            }).catch((error)=>{
+                return reject(error)
+            })
+        }
+    })
+}
+
+Promise.myAll([promise1,promise2]).then((res)=>{
+    console.log(res)
+}).catch((error)=>{
+    console.log(error)
+})
+
 ```
 
 
