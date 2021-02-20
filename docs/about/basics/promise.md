@@ -474,3 +474,23 @@ Promise.race([p1, p2]).then((result) => {
 })
 
 ```
+
+
+## Promise.race()实现
+
+```
+
+Promise.myRace = function (promiseArr){
+    let len = promiseArr.length;
+    return new Promise(function (resolve, reject){
+        for (let i=0;i<len;i++){
+            Promise.resolve(promiseArr[i]).then(function (){
+                return resolve(promiseArr[i])
+            }).catch(function (error){
+                return reject(promiseArr[i])
+            })
+        }
+    })
+}
+
+```
