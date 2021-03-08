@@ -112,7 +112,7 @@ function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,g
   return [{
       title: groupA,
       collapsable: false,
-      children: ['/about/basics/dsBridge','/about/basics/事件流','/about/basics/跨域','/about/basics/generator','/about/basics/循环相关函数','/about/basics/Object','/about/basics/数据类型','/about/basics/数组操作','/about/basics/new的过程','/about/basics/原型链', '/about/basics/闭包','/about/basics/异步', '/about/brower/事件循环','/about/brower/渲染过程', '/about/basics/arguments','/about/basics/promise','/about/basics/ts学习','/about/basics/垃圾回收机制']
+      children: ['/about/basics/dsBridge','/about/basics/事件流','/about/basics/跨域','/about/basics/generator','/about/basics/循环相关函数','/about/basics/Object','/about/basics/数据类型','/about/basics/数组操作','/about/basics/new的过程','/about/basics/原型链', '/about/basics/闭包','/about/basics/异步', '/about/brower/事件循环','/about/brower/渲染过程', '/about/basics/arguments','/about/basics/promise','/about/basics/ts学习','/about/basics/垃圾回收机制','/about/basics/模块化']
     },
     {
       title: groupB,
