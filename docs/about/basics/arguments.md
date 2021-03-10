@@ -6,7 +6,7 @@ arguments 对象是所有（非箭头）函数中都可用的局部变量。
 - arguments 可以通过下标取值，如 arguments[0]
 - arguments 可以通过 arguments.length 查看 len 长度
 
-```
+```javascript
     function f() {
         console.log(arguments) // { '0': 1, '1': 2, '2': 3, '3': 4 }
     }
@@ -21,7 +21,7 @@ arguments 对象是所有（非箭头）函数中都可用的局部变量。
 - Array.prototype.slice.call()
 - 通过循环遍历 arguments
 
-```
+```javascript
 function f() {
     let a = [...arguments];
     console.log(a); //[1,2,3,4]
@@ -39,6 +39,3 @@ f(1,2,3,4);
 - 箭头函数没有 arguments 对象
 - 箭头函数没有 this，this 查找规则自下往上查找
 
-```
-
-```

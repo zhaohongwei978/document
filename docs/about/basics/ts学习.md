@@ -40,7 +40,7 @@
 
 ### 元组 不能改变数据类型和个数
 
-```
+```javascript
 let tuple:[number,string] = [1,'2']
 tuple.push(3)
 //虽然元组可以往里push元素，但是在实际的开发过程中是不建议这么操作的，并且push进去的值 不允许访问。
@@ -88,7 +88,7 @@ while(true){
 
 ### 类的概念
 
-```
+```javascript
 class Dog{
     name: string;
     constructor(name:string){
@@ -119,8 +119,7 @@ console.log(dog)//打印类的实例，发现属性挂在实例上。
 - 2 实例不能访问 private 修饰的变量
 - 3 子类 super 不能调用父类 private 修饰的变量
 - 4 如果用 private 修饰 constructor 该类既不能被继承 也不能被实例化。
-
-```
+```javascript
 class Dog{
     private name: string;
     constructor(name:string){
@@ -155,7 +154,7 @@ class TT extends Dog{
 - protected 受保护的，受保护的成员只能在类中或者子类中访问，不能在实例中访问。
 - protected 修饰 constructor，表示该类不能被实例化，只能被继承。
 
-```
+```javascript
 class Dog{
     protected name: string;
     constructor(name:string){
@@ -194,7 +193,7 @@ class TT extends Dog{
 - 静态成员 只能通过类名调用
 - 实例对象 不能调用到静态成员
 
-```
+```javascript
 class Dog{
     static test: string = ''; //静态成员
     constructor(){

@@ -11,7 +11,7 @@ Object.create(proto, [propertiesObject])
 - proto : 必须。表示新建对象的原型对象，该参数可以是null， 对象， 函数的prototype属性 （创建空的对象时需传null , 否则会抛出TypeError异常）。
 - propertiesObject :  添加到新创建对象的可枚举属性。
 
-```angular2html
+```javascript
 let a = Object.create({name:'kira',info:{value:'111'}})
 
 console.log(a) // {}
@@ -36,13 +36,13 @@ console.log(c.__proto__.__proto__) // {name:1}
 - Object.create自定义自己的原型
 - Object.create(null); //{} 没有原型
 
-```angular2html
+```javascript
 let a = {}
 console.log(a);// {}
 consloe.log(a.__proto__)//打印的是Object的内容 
 ```
 
-```$xslt
+```javascript
 var anotherObject = { a:2};
 // 创建一个关联到 anotherObject 的对象
 var myObject = Object.create( anotherObject );
@@ -51,7 +51,7 @@ myObject.a; // 2 实际上就是把a:2 挂载到了myObject上
 
 ### Object.create 一些问题
 
-```
+```javascript
 const fatherObj = {name:'father',age:20}
 let obj = Object.create(fatherObj,{test:{value:1,enumerable:true,writable:true}})
 console.log(obj)//{test:1}
@@ -79,7 +79,7 @@ Object.assign()方法只会合并替换对象的第一层 key，对于多层的�
 
 Object.assign 会将 source 里面的可枚举属性复制到 target。如果和 target 的已有属性重名，则会覆盖。同时后续的 source 会覆盖前面的 source 的同名属性。
 
-```
+```javascript
 let obj1 = {
   a: {
     b: {
@@ -108,7 +108,7 @@ a: {
 
 Object.assign 只能拷贝第一层。
 
-```
+```javascript
 let a = {a:1,b:2}
 let b= {c:3,d:{name:'kira'}};
 
@@ -154,7 +154,7 @@ console.log('----a',a)
 
 ### 深比较判断两个对象是否相等
 
-```angular2html
+```javascript
 const a = {a:10,b:{c:10,d:20}}
 const b = {a:10,b:{c:10,d:20}}
 //
@@ -186,7 +186,7 @@ function isEqual(a,b) {
 **<font color="red">浅拷贝只拷贝一层，如果属性是基本数据类型就拷贝值。如果属性是引用类型就拷贝地址。</font>**
 
 
-```angular2html
+```javascript
 let a = {name:'kira',info:{age:25}}
 let b = Object.assign({},a)
 a.name = '123'
@@ -198,7 +198,7 @@ console.log(b)//{name:'kira',info:{age:23}}
 
 ### 两个对象之间的比较
 
-```angular2html
+```javascript
 let a = {a:1}
 let b = {a:1}
 let c = new Object(a)
@@ -206,7 +206,3 @@ console.log(a === b) // false 两个对象在堆中的指针地址不同
 
 console.log(a === c) // true 两个对象的指针地址相同
 ```
-
-
-
-

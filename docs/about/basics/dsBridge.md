@@ -4,7 +4,7 @@ JSBridge 就是JavaScript(H5)与Native通信的桥梁，在H5开发中经常有�
 
 ## android端开启bridge关键代码
 
-```angular2html
+```java
 @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ class InjectNativeObject{
 - 第一种就是 Native内嵌的H5可以获取到一个全局对象AppBridge。通过该对象就可以调用到Native上对象绑定的方法。
 - 第二种即 **<font color="red"> Android端通过shouldOverrideUrlLoading  </font>** 拦截URL Schema
 
-```angular2html
+```javascript
 // 注入的对象
 window.AppBridge = AppBridge || {}; 
 

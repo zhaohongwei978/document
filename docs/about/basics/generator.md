@@ -4,7 +4,7 @@
 
 不使用async await
 
-```angular2
+```javascript
 //如果不使用async await想要实现异步调用，就需要嵌套。
 $ajax('url',function(){
     $('ajax',function(){
@@ -15,7 +15,7 @@ $ajax('url',function(){
 使用generator实现 async函数
 await相当于是返回的的promise包裹的对象。
 
-```angular2
+```javascript
 async function a(){
     
     await ajax.('url') // 等待一个请求的返回结果，await会返回一个promise对象

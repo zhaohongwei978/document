@@ -23,7 +23,7 @@
 
 ## 问题 1 同一个 BFC 下外边距会发生折叠（margin 重叠问题）
 
-```angular2
+```css
 <style>
 *{
     margin: 0;
@@ -61,7 +61,7 @@ div {
 
 原因：因为 float 浮起的元素会脱离文档流，不占用文档流，自然就会遮挡其他盒子。
 
-```angular2
+```html
 div style="width: 100px ;height: 100px;background-color: #42b983;float: left">浮动元素</div>
 <div style="width: 200px;height: 200px;background-color: orangered;overflow:hidden"></div>
 ```

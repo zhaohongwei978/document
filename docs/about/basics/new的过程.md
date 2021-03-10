@@ -7,7 +7,7 @@ new 在执行的过程中，如果有return 即返回return的内容，如果没
 - 3 设置原型链，新对象**proto** 指向构造函数的 prototype
 - 4 判断传入对象类型是否一个对象，是则返回新对象 否则直接返回。
 
-```
+```javascript
 1 创建一个空对象
 2 新对象继承Person.prototype
 3 使用指定的参数调用构造函数 Person ，并将 this 绑定到新创建的对象

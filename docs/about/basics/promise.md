@@ -8,7 +8,7 @@
 - new Promise 时候 让excutor执行，传如一个成功resolve方法，一个reject方法。
 - 通过这两个方法改变，reason和val的值。和padding的状态。
 - padding状态只能改变一次。
-```angular2
+```javascript
 const PADDING = 'PADDING';
 const RESOLVE = 'RESOLVE';
 const REJECT = 'REJECT';
@@ -120,7 +120,7 @@ class myPromise {
 
 - 根据上一个promise的返回结果x，如果x是一个promise调用then。
 - 如果x是一个普通的值或者underfind则返回promise一个新的promise。
-```
+```javascript
 
 const PADDING = 'PADDING';
 const RESOLVE = 'RESOLVE';
@@ -220,7 +220,7 @@ module.exports = myPromise
 - then 正常返回 resolved，里面有报错则返回 rejected。
 - catch 正常返回 resolved, 里面有报错则返回 rejected。
 
-```
+```javascript
 题目1
 const p2 = Promise.resolve().then(()=>{
     throw new Error('error') //会返回rejectred的promise，之后的回调是then
@@ -253,7 +253,7 @@ Promise.resolve().then(()=>{
 - try...catch可以捕获异常,代替来Promise.catch 
 - await后面的内容都是异步的内容
 
-```
+```javascript
 //执行aysnc函数,返回的是Promise对象
 async function  fn1() {
     return  100; //相当于return Promise.resolve(100);
@@ -302,7 +302,7 @@ async function fn4{
 ```
 
 
-```
+```javascript
 async function async1(){
     console.log('fn start')
     await async2()
@@ -329,7 +329,7 @@ fn end
 
 ### 场景题分析 
 
-```
+```javascript
 async function fn(){
     return 100
 }
@@ -340,7 +340,7 @@ async function fn(){
 })()    
 ```
 
-```
+```javascript
 (async function(){
     console.log('start')
     const a = await 100
@@ -399,7 +399,7 @@ Promise.all获得的成功结果的数组里面的数据顺序和Promise.all接�
 - 处理多个promise的状态，当p1，p2都成功时，返回的是 [p1,p2].
 - 当p1,p2有一个失败时候，走的是catch 方法，返回的值是第一个reject的值。
 
-```angular2html
+```javascript
 let p1 = new Promise((resolve, reject) => {
     resolve('成功了')
 })
@@ -418,7 +418,7 @@ Promise.all([p1, p2]).then((result) => {
 ```
 ## promise.all()实现
 
-```
+```javascript
 Promise.myAll = function (promiseArr){
     return new Promise((resolve, reject) => {
         let len = promiseArr.length;
@@ -452,9 +452,7 @@ Promise.myAll([promise1,promise2]).then((res)=>{
 Promse.race就是赛跑的意思，意思就是说，Promise.race([p1, p2, p3])里面哪个结果获得的快，就返回那个结果，不管结果本身是成功状态还是失败状态。
 
 
-```angular2html
-
-
+```javascript
 let p1 = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve('success')
@@ -478,8 +476,7 @@ Promise.race([p1, p2]).then((result) => {
 
 ## Promise.race()实现
 
-```
-
+```javascript
 Promise.myRace = function (promiseArr){
     let len = promiseArr.length;
     return new Promise(function (resolve, reject){
