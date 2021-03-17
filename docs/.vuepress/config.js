@@ -39,6 +39,10 @@ module.exports = {
             link: '/about/project/微前端'
           },
           {
+            text: '性能监控',
+            link: '/about/project/性能监控'
+          },
+          {
             text: '小程序架构',
             link: '/about/project/小程序架构设计'
           },
@@ -76,9 +80,9 @@ module.exports = {
         sidebar: {
           '/about/': getBasicsSidebar(
             'JS基础',
-            'HTML',
+            'Node',
             'CSS',
-            'VUE基础',
+            'VUE',
             'React',
             'Wepback',
             'Http',
@@ -111,13 +115,13 @@ module.exports = {
 function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,groupH,groupI) {
   return [{
       title: groupA,
-      collapsable: false,
+      collapsable: true,
       children: ['/about/basics/dsBridge','/about/basics/事件流','/about/basics/跨域','/about/basics/generator','/about/basics/循环相关函数','/about/basics/Object','/about/basics/数据类型','/about/basics/数组操作','/about/basics/new的过程','/about/basics/原型链', '/about/basics/闭包','/about/basics/异步', '/about/brower/事件循环','/about/brower/渲染过程', '/about/basics/arguments','/about/basics/promise','/about/basics/ts学习','/about/basics/垃圾回收机制','/about/basics/模块化']
     },
     {
       title: groupB,
       collapsable: true,
-      children: []
+      children: ['/about/node/io','/about/node/koa']
     },
     {
       title: groupC,
