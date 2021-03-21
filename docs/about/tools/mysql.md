@@ -21,3 +21,11 @@ https://dev.mysql.com/downloads/file/?id=501470
 - docker安装nginx docker pull nginx:latest   
 
 
+# mac无法识别开发者身份解决办法 
+
+先执行 sudo spctl --master-disable
+此步骤也通常用来解决 mac打开软件时提示软件已损坏或无法验证 的错误
+
+再执行以下命令
+sudo xattr -r -d com.apple.quarantine /Applications/DevSidecar.app
+
