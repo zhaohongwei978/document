@@ -4,7 +4,7 @@
 ## 实现一个v-model双向数据绑定 
 
 父组件如果给子组件传了v-model,子组件默认可以通过value来接收到父组件的属性值，如果不使用value可以通过自定义的model来实现。
-```$xslt
+```javascript
 //父组件
 <template>
   <div id="app">
@@ -35,7 +35,7 @@ export default {
 }
 </script>
 ```
-```$xslt
+```javascript
 //子组件
 <template>
   <div>

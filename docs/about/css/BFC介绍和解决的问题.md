@@ -23,7 +23,7 @@
 
 ## 问题 1 同一个 BFC 下外边距会发生折叠（margin 重叠问题）
 
-```css
+```html
 <style>
 *{
     margin: 0;
@@ -51,7 +51,7 @@ div {
 
 由于浮动，容器内元素脱离了文档流 所以容器只剩下 10px 边距对象，如果触发 BFC，BFC 可以包裹浮动元素。
 
-```angular2
+```html
 <div style="border: 5px solid red;overfow:hidden">
     <div style="width: 100px ;height: 100px;background-color: #42b983;float: left"></div>
 </div>

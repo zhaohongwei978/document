@@ -1,9 +1,7 @@
 # js 问题
-
-
 ## 统计字符串中出现最多自符的数量，以及下标志
 
-```
+```javascript
 let str= 'ssssdfasdada'
 function  fn(str){
     let strArr = str.split('');
@@ -33,7 +31,7 @@ fn(str)
 
 ## 左边旋转字符串
 
-```
+```javascript
 console.log(fn('dagasfadawd',2))
 
 function fn(str,n){
@@ -71,7 +69,7 @@ JavaScript 语言居然有两个表示"无"的值：undefined 和 null。
 
 函数声明式
 
-```angular2html
+```javascript
 function 函数名 （参数…）{
     //something...
 }
@@ -81,7 +79,7 @@ function 函数名 （参数…）{
 
 函数表达式（Function Expression）是将函数定义为表达是语句的一部分（通常是变量赋值）。通过函数表达式定义的函数是可以命名的，也可以是匿名的。不能以function开头（立即执行函数开头按()算😄）。
 
-```angular2html
+```javascript
 
 //变量a引用了一个匿名函数表达式
 var a = function(){
@@ -103,7 +101,7 @@ var a =  function test (){
 
 通过sort进行排序
 
-```angular2html
+```javascript
 let arr = [
     { id:8,obj:'88'},
     { id:3,obj:'33'},
@@ -121,7 +119,7 @@ console.log(arr)
 
 ## js var a = b = c = 10问题？
 
-```angular2html
+```javascript
 
  function fn(){
     var a = b = c = 10;  
@@ -150,7 +148,7 @@ undefined 表示"缺少值"，就是此处应该有一个值，但是还没有�
 这样判断一个值是否存在，就可以用
 objA.valueA === undefined // 不应使用 null 因为 undefined == null，而 null 表示该值定义为空值。
 
-```
+```javascript
 underfind === null // false
 typeof underfind //underdind
 typeof null //object
@@ -173,7 +171,7 @@ typeof null //object
 - 2 元素末尾追加 div.style="clear:both"
 - 3 通过伪类
 
-```
+```css
 .clearfix::after{
     content:'' //伪元素内容 为''让伪元素不显示
     //clear属性只能在块级元素上其作用，这就是清除浮动样式中display:block的作用。
@@ -205,7 +203,7 @@ DPR(devicePixelRatio) 设备像素比，它是默认缩放为 100%的情况下�
 
 ### 方法 1 通过 border-img
 
-```angular2
+```css
   border: 1px solid transparent;
   border-image: url('./../../image/96.jpg') 2 repeat;
 ```
@@ -214,7 +212,7 @@ DPR(devicePixelRatio) 设备像素比，它是默认缩放为 100%的情况下�
 
 仔细看,能看出这是阴影不是边框。
 
-```angular2
+```css
 box-shadow: x偏移量 y偏移量 偏移半径 颜色;
 box-shadow: 0  -1px 1px -1px #e5e5e5,   //上边线
             1px  0  1px -1px #e5e5e5,   //右边线
@@ -224,7 +222,7 @@ box-shadow: 0  -1px 1px -1px #e5e5e5,   //上边线
 
 ### 方法 3 在伪元素中定位，通过 transform 缩放
 
-```angular2
+```css
 setOnePx{
   position: relative;
   &::after{
@@ -243,7 +241,7 @@ setOnePx{
 
 ### 设置 viewport 的 scale 值
 
-```angular2
+```html
 <meta name="viewport" id="WebViewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 <script>
           var viewport = document.querySelector("meta[name=viewport]");
@@ -270,7 +268,7 @@ setOnePx{
 
 - 打印 window.performance.timing
 
-```angular2
+```
     timing: {
         navigationStart: 同一个浏览器上一个页面卸载(unload)结束时的时间戳。如果没有上一个页面，这个值会和fetchStart相同。
         unloadEventStart: 上一个页面unload事件抛出时的时间戳。如果没有上一个页面，这个值会返回0。
@@ -296,7 +294,7 @@ setOnePx{
 }
 ```
 
-```angular2
+```js
 // 重定向耗时
 redirect: timing.redirectEnd - timing.redirectStart,
 // DOM 渲染耗时
@@ -335,7 +333,7 @@ HTML5 标准规定了 setTimeout()的第二个参数的最小值（最短间隔�
 
 执行效率问题
 
-```
+```js
 虽然两段代码执行效果一样，但是第二段代码(16.7ms/3)就要执行一次函数，很浪费性能。
 如果每次增加10或者更大，使用setTimeOut会有明显卡顿卡。
 let currentWidth = 100
@@ -395,7 +393,7 @@ carInfoEl.appendChild(fragment) //把fragement添加到真实DOM上。
 通过使用 DocumentFragement。存储每次要插入的文档。
 使用 requestAnimationFragement 动态 在真实 DOM 上添加 fragement。
 
-```
+```js
     setTimeout(() => {
     // 插入十万条数据
     const total = 100000;
@@ -429,7 +427,7 @@ carInfoEl.appendChild(fragment) //把fragement添加到真实DOM上。
 
 ## Promise 状态不能被二次改变问题
 
-```
+```js
 new Promise(function(resolve,reject){
     resoleve()
     throw Error('error')
@@ -446,7 +444,7 @@ throw Error 并不会触发 catch 的执行
 
 此题考察的是对原型链继承关系的理解，和对 new 的认识。
 
-```
+```js
 Object.prototype.a = function(){
     console.log('object')
 }
@@ -472,7 +470,7 @@ new的过程
 
 export 具名导出
 
-```angular2
+```js
 //文件1
 //第一个js文件
 这种导出方式在导入的时候名字必须与导出名字一致，并且导出多个数据的时候必须写成对象的形式，然后我们在第二个js文件中通过下面代码导入第一个js文件
@@ -490,7 +488,7 @@ export default（匿名导出）
 
 匿名导出只能导出一次。
 
-```angular2
+```js
 class Person{
     constructor(name){
         this.name = name;
@@ -511,7 +509,7 @@ import Person from '上面文件路径'
 
 变量提升
 
-```angular2html
+```js
 
 console.log(foo); // undefined
 var foo = 'kira';
@@ -528,7 +526,7 @@ console.log(foo
 
 函数提升
 
-```angular2html
+```js
 
 function foo () {
     // to do...
@@ -541,7 +539,7 @@ var foo = function(){
 }
 ```
 
-```angular2html
+```js
 
 console.log(bar);  // f bar() { console.log(123) }
 console.log(bar()); // undefined
@@ -588,7 +586,7 @@ console.log(bar()) //bar is not function
 
 ##  通过url获取参数
 
-```angular2html
+```js
 
 function query(name){
     const search = location.search
@@ -601,7 +599,7 @@ function query(name){
 
 ## 把url参数转为JSON
 
-```angular2html
+```js
 
 function queryToJSON(){
     const json = {}
@@ -619,6 +617,3 @@ function queryToJSON(){
 query()
 
 ```
-
-
-

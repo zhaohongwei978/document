@@ -6,7 +6,7 @@
 - 2 在a.js中引入b.js的某个模块并输出，
 - 3 查看webpack打包后的结果。
 
-```
+```javascript
 a.js内容 
 
 improt { goPlay  } from './b.js'
@@ -28,12 +28,11 @@ webpack打包输出的结果 npm run build
   },
 ```
 
-
 ## entry指定打包入口
 
 webpack是一个模块打包器，根据文件的依赖关系进行模块化打包。
 
-```
+```javascript
 //单入口
 module.exports = {
     entry:'./path/file1.js'
@@ -52,7 +51,7 @@ module.exports = {
 
 指定结果代码输出的位置
 
-```
+```javascript
 //在weboack.config.js中配置 
 
 'use strict'
@@ -76,8 +75,7 @@ module.exports ={
 
 ```
 
-
-## loader相关 
+## loader相关
 
 ### 常用loader
 
@@ -91,7 +89,7 @@ module.exports ={
 | thread-loader  | 多线程打包 |
 | raw-loader  | 将文件以字符串形式导入 |
 
-### babel-loader的使用 
+### babel-loader的使用
 
 通过该方式就可以对es6语法进行支持
 
@@ -99,7 +97,7 @@ module.exports ={
 
 2 配置.babellrc文件
 
-```
+```javascript
 {
     "presets": ["@babel/preset-env"],
     "plugins": ["@babel/proposal-class-properties"]
@@ -108,7 +106,7 @@ module.exports ={
 
 3 babel-loader配置
 
-```
+```javascript
 module:{
     rules:[{
         test: /.js$/,
@@ -116,9 +114,10 @@ module:{
     }]
 }
 ```
+
 4 babel增加对 react的支持
 
-```
+```javascript
 // 1 npm i react react-dom @babel/preset-react -d
 
 // 2 .babellrc中增加对react的babel
@@ -145,6 +144,7 @@ ReactDOM.render(
 )
 
 ```
+
 ### css-loader相关处理
 
 作用
@@ -155,7 +155,7 @@ ReactDOM.render(
 - 1 npm i style-loader css-loader -d
 - 2 loader解析scss
 
-```
+```javascript
 module:{
         rules:[{
             test: /.js$/,
@@ -169,17 +169,19 @@ module:{
         }]
     }
 ```
+
 ### file-loader相关
 
 - 通过使用file-loader可以解析 png jpg gif svg等的解析。用file-loader打包的图片会给每张图片都生成一个随机的hash值作为图片的名字,并可以通过outputPath参数指定其所打包后存放的位置。
 
-使用过程 
-- 通过npm i file-loader -d 安装file-loader 
+使用过程
+
+- 通过npm i file-loader -d 安装file-loader
 - file-loader配置
 - file-loader的常用配置项：
 name配置项是配置打包生成的文件的名字，使用的是placeholder语法， [name]   表示的是原文件的名字；[hash]  表示的是这次打包的hash值   [ext]表示的是原文件的后缀；
 
-```
+```javascript
 {
     test:/\.(png|jp?g|gif)$/,
     use:{
@@ -193,13 +195,16 @@ name配置项是配置打包生成的文件的名字，使用的是placeholder�
 
 ```
 
-### url-loader相关 
-- 通过npm i file-loader url-loader -d 
+### url-loader相关
+
+- 通过npm i file-loader url-loader -d
 - url-loader是file-loader的加强版，在file-loader的基础上增加了一些功能。同时拥有file-loader的全部功能。
-- url-loader优势主要是支持limit(在业务中如果有一些小图icon建议打包成svg，如果是大图不建议打包svg，因为会增大html代码体积)。   
-## plugins相关 
+- url-loader优势主要是支持limit(在业务中如果有一些小图icon建议打包成svg，如果是大图不建议打包svg，因为会增大html代码体积)。
+
+## plugins相关
 
 plugins作用于整个构建过程。用于bundle文件的优化，资源管理以及环境变量的注入等。
+
 ### 常用plugins
 
 |  plugins名   | 作用  |
@@ -215,8 +220,8 @@ plugins作用于整个构建过程。用于bundle文件的优化，资源管理�
 ### 热更新相关问题
 
 - 方法1 通过watch参数配置更新（使用该方式需要每次修改完配置之后都需要刷新页面）
- 
-```
+
+```javascript
 // 启动webpack 设置--watch 或者 在webpack.config.js中设置watch
 
 scripts": {
@@ -226,19 +231,18 @@ scripts": {
 }
 ```
 
-
 - 方法2  webpack-dev-server热更新
-    - 不需要刷新浏览器。
-    - 不需要输出文件，放在内存中。
-    - 可以使用HotModuleReplacementPlugin(webpack自带)
-    - 要将mode模式改为development
+  - 不需要刷新浏览器。
+  - 不需要输出文件，放在内存中。
+  - 可以使用HotModuleReplacementPlugin(webpack自带)
+  - 要将mode模式改为development
 
 使用
 
 - 1 安装 sudo npm install webpack-dev-server -g
-- 2 配置package.json 
+- 2 配置package.json
 
-```
+```javascript
  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch",
@@ -248,8 +252,8 @@ scripts": {
 ```
 
 - 3 webpack.config.js配置
-```
-//
+
+```javascript
 module.exports ={
     entry:{
         file1:'./src/index.js',
@@ -274,8 +278,8 @@ module.exports ={
     }
 }
 ```
-### sliptChunksPlugin进行公共脚本分离
 
+### sliptChunksPlugin进行公共脚本分离
 
 ## 文件指纹
 
@@ -292,7 +296,8 @@ module.exports ={
 - optimize-css-assets-webpack-plugin + cssnano
 
 用来压缩css
-```
+
+```javascript
 //第一步导入相关资源
 npm i  optimize-css-assets-webpack-plugin -d
 npm i cssnano -d 
@@ -306,6 +311,7 @@ plugins:[
     })
 ],
 ```
+
 - 设置html-webpack-plugin设置压缩参数，压缩html文档
 
 ```
@@ -323,10 +329,10 @@ npm i html-webpack-plugin -d
 | production  | 会开启FlagDependencyUsagePlugin，FlagIncluedChunksPlugin，ModuleConcatenationPlugin，NoEmitOnErrorsPlugin，OccurrenceOrderPlugin，SideEffectsFlagPlugin 和 TerserPlugin  |
 | none  | 不开启任何优化  |
 
-
 ## source map
 
 推荐
+
 ```
 //eval 速度
 //souce-map 产生.map文件
@@ -337,12 +343,14 @@ npm i html-webpack-plugin -d
  //生产环境
  devtool:"cheap-module-souce-map"
 ```
+
 source map设置等级，可以方便开发环境的调试。
 
 ## webpack打包速度
 
 ### 指定loader作用的范围
-```
+
+```javascript
 {
     test: /.js$/,
     //在指定目录查找
@@ -366,11 +374,12 @@ resolve:{
     modules:[path.resolve(__dirname,"./node_modules")]
 },
 ```
+
 ### externals引用cdn资源
 
 如 import jquery from 'jquery'，我们引入了jquery资源，但是在打包的过程中我们不想把jquery打包到boundle.js中，而是通过cdn引入。可以通过externals配置。
 
-```
+```javascript
 //在html中引入资源
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
 //在webpack配置中
@@ -385,7 +394,8 @@ module.exports = {
 ## 简单webpack从0搭建
 
 package.json
-```
+
+```json
    {
   "name": "webpackStudy",
   "version": "1.0.0",
@@ -413,8 +423,7 @@ package.json
 
 新建config
 
-webpack是模块化打包工具，通过webpack可以把 .vue .sass .less .jsx .js等编译成 .js .css .png .jpg 
-
+webpack是模块化打包工具，通过webpack可以把 .vue .sass .less .jsx .js等编译成 .js .css .png .jpg
 
 ```angular2html
 ##  全局安装webpack
@@ -424,10 +433,10 @@ npm i webpack  webpack-cli -g
 webpack -v
 ```
 
-
-### webpack打包后的文件 
+### webpack打包后的文件
 
 - 首先打包后的结果，该函数是自执行函数
+
 ```angular2html
 (function(){
 
@@ -443,36 +452,35 @@ function __webpack_require__(moduleId){
 
 ```
 
-
-```angular2html
+```javascript
 
  (function(modules) { // webpackBootstrap
- 	// The module cache
- 	var installedModules = {};
+  // The module cache
+  var installedModules = {};
 
- 	// The require function
- 	function __webpack_require__(moduleId) {
+  // The require function
+  function __webpack_require__(moduleId) {
 
- 		// Check if module is in cache
- 		if(installedModules[moduleId]) {
- 			return installedModules[moduleId].exports;
- 		}
- 		// Create a new module (and put it into the cache)
- 		var module = installedModules[moduleId] = {
- 			i: moduleId,
- 			l: false,
- 			exports: {}
- 		};
+   // Check if module is in cache
+   if(installedModules[moduleId]) {
+    return installedModules[moduleId].exports;
+   }
+   // Create a new module (and put it into the cache)
+   var module = installedModules[moduleId] = {
+    i: moduleId,
+    l: false,
+    exports: {}
+   };
 
- 		// Execute the module function
- 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+   // Execute the module function
+   modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
- 		// Flag the module as loaded
- 		module.l = true;
+   // Flag the module as loaded
+   module.l = true;
 
- 		// Return the exports of the module
- 		return module.exports;
- 	}
+   // Return the exports of the module
+   return module.exports;
+  }
     (function(module, exports) {
     eval("console.log('hello')\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
     })
@@ -480,7 +488,6 @@ function __webpack_require__(moduleId){
  });
 
 ```
-
 
 ```angular2html
 webpack优化点，使用懒加载 热更新 不用的不引入 大的包放在CDN上
@@ -496,5 +503,3 @@ webpack优化点，使用懒加载 热更新 不用的不引入 大的包放在C
 一些资源包如 jquery不打包，通过cdn引入。如果打包进来体积爆炸。
 
 ```
-
-

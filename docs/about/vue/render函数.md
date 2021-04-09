@@ -1,8 +1,7 @@
 # render 函数
 
+```javascript
 - vm.\_render 最终是通过执行 createElement 方法并返回的是 vnode，它是一个虚拟 Node
-
-```
 //如果存在render函数，vue就不再寻找template
 var app = new Vue({
     el:'#app',
@@ -12,7 +11,7 @@ var app = new Vue({
             attrs:{
                 id:'#app1'
             }
-        },this.msssage)
+        },this.message)
     },
     data(){
         return{

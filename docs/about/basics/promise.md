@@ -53,7 +53,7 @@ class promise{
 - 通过setTimeOut(function(){ resolve('success') })模拟异步，此时的then方法中status状态为 padding。
 - 通过发布订阅的模式，把成功的回调和失败的回调分别放在各自数组中。
 
-```angular2
+```javascript
 class myPromise {
         constructor(executor) {
             this.status = PADDING;

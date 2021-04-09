@@ -8,8 +8,7 @@
 
 this.a = 1 //新增属性监听不到
 delete this.a //删除属性
-
-```
+```javascript
 const proxyData = new Proxy(data,{
     get(target,key,receiver){
         const result = Reflect.get(target,key,receiver)
@@ -30,7 +29,7 @@ const proxyData = new Proxy(data,{
 - setup()新语法，写了这个就不需要再写 data methods 这样的东西了。
 - setup() :开始创建组件之前，在 beforeCreate 和 created 之前执行。创建的是 data 和 method
 
-```
+```javascript
 setup(){
     //在setup中定义变量
     const girls = ref(['11','22','333']);
@@ -51,8 +50,7 @@ setup(){
 ## reactive 函数
 
 - reactive 和 ref 都是为了定义响应式的数据。
-
-```
+```javascript
 interface DataProps {
   girls: string[];
   selectGirl: string;

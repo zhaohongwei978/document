@@ -3,8 +3,7 @@
 ## 获取 render
 
 思路：vue 只认 render 函数，如果存在 render 函数直接使用，如果 render 函数不存在，找到 template 把 template 编译成 render 函数。
-
-```
+```javascript
 //缓存了原型上的 $mount 方法
 const mount = Vue.prototype.$mount
 //重新定义mount方法

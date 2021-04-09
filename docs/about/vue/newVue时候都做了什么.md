@@ -7,7 +7,7 @@ Vue 初始化主要就干了几件事情，合并配置，初始化生命周期�
 - 数据代理 proxy（主要访问属性 key，实际访问的是 this.\_data.key）
 - 数据的初始化主要是 observe 的过程
 
-```
+```javascript
 //vue初始化state
 export function initState (vm: Component) {
   vm._watchers = []
@@ -27,7 +27,7 @@ export function initState (vm: Component) {
 
 ```
 
-```
+```javascript
 //初始化data
 function initData (vm: Component) {
   let data = vm.$options.data
@@ -75,7 +75,7 @@ function initData (vm: Component) {
 
 proxy 主要是对属性的代理 当我们访问 this.title 时，实际上访问的是 this.\_data.title.
 
-```
+```javascript
 export function proxy (target: Object, sourceKey: string, key: string) {
   sharedPropertyDefinition.get = function proxyGetter () {
     return this[sourceKey][key]
@@ -87,7 +87,7 @@ export function proxy (target: Object, sourceKey: string, key: string) {
 }
 ```
 
-```
+```javascript
 vm._self = vm
 initLifecycle(vm)
 initEvents(vm)

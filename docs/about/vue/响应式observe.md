@@ -11,7 +11,7 @@
 
 ## 对象侦测
 
-```
+```javascript
     function observer(target){
         if(typeof target !== 'object' || target === null){
             return;
@@ -58,7 +58,7 @@
 
 自定义数组操作方法的实现思路，更新视图，并原生数组操作方法。
 
-```
+```javascript
 //重新定义数组原型
 const oldArrayProperty = Array.prototype;
 //创建新对象 原型指向oldArrayProperty 扩展的新方法不会影响原型

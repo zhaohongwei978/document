@@ -122,13 +122,15 @@ router:[
 
 ## 请用vnode描述一个DOM结构
 
-```
+```html
 <div id="div1" class="container" >
     <p>vdom</p>
     <ul style="font-size:10px">
         <li>111</li>
     </ul>
 </div>
+```
+```js
 
 {
     tag:"div",
@@ -150,6 +152,7 @@ router:[
         }
     ]
 }
+
 ```
 
 # vue监听data变化，响应式原理
@@ -181,7 +184,7 @@ o(n3次方) 降低到O(n) 并描述diff算法过程
     如果一个list内部的某些flag需要判断应该如何做，可以通过computed把需要展示的数据做过滤。
     避免list循环内部v-if的判断。
 
-```
+```html
     <div v-for="item in list" v-if="">
 ```
 
@@ -190,7 +193,7 @@ o(n3次方) 降低到O(n) 并描述diff算法过程
 为了让每个组件实例维护属于自己的一个data，如果data不是函数，会造成多个组件公用同一个data对象。                                       
 
 ## vue中如何使用 插件 Plugin？
-```
+```js
 let MyPlugin = {}
 MyPlugin.install = function(Vue,options){
     //增加全局方法

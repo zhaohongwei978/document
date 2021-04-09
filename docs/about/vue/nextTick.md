@@ -12,7 +12,7 @@ vue在 beforeCreate，created阶段主要完成初始化的操作，但如果我
 
 如果是mounted阶段，vue已经挂载和渲染完成，所以此时获取DOM是可以拿到的。
 
-```
+```javascript
 <template>
 //打印的结果是 begin，为什么我们明明已经将 test 设置成了“end”,获取真实 DOM 节点的 innerText 却没有得到我们预期中的“end”，可见该操作是异步的。
   <div>
@@ -38,32 +38,32 @@ export default {
 
 通过 nextTick，我们可以拿到 DOM 操作之后的结果。
 
-```
+```javascript
 <template>
-	<div class="" id="app">
-		<span ref="msg">{{msg}}</span>
-	    <button @click="change">button</button>
+ <div class="" id="app">
+  <span ref="msg">{{msg}}</span>
+     <button @click="change">button</button>
   </div>
 </template>
 
 <script>
 export default {
-	name: 'app',
-	data(){
-		return{
-			msg:'1111'
-		}
-	},
-	methods:{
-		change(){
+ name: 'app',
+ data(){
+  return{
+   msg:'1111'
+  }
+ },
+ methods:{
+  change(){
 
             this.msg = "222"
             console.log('1111',this.$refs.msg.innerHTML) //打印结果 111
-			this.$nextTick(()=>{
-				console.log('1111',this.$refs.msg.innerHTML) //打印结果 222
-			})
-		},
-	}
+   this.$nextTick(()=>{
+    console.log('1111',this.$refs.msg.innerHTML) //打印结果 222
+   })
+  },
+ }
 }
 </script>
 ```
@@ -74,7 +74,7 @@ export default {
 - 2 dep.notice()触发 dep 下的 weather
 - 3 weatcher.update(),update 有同步更新，和异步更新（queueWeather）。
 
-```
+```javascript
 update () {
     /* istanbul ignore else */
     if (this.lazy) {
@@ -95,7 +95,7 @@ update () {
 - 2 利用 hash 的 map 结构 对 weather 去重，防止相同的 weather 被重复添加到 queue 中。
 - 3 nextTick 利用事件循环，在一下次 tick 时，执行所有 queue 队列中的 weather，更新视图。
 
-```
+```javascript
 let has = {};
 let queue = [];
 let waiting = false;

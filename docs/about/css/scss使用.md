@@ -5,7 +5,7 @@
 - 形式1 $bg:#ddd;
 - 形式2 $font:{ s:12px,m:14px,l:16px }
 
-```angular2html
+```scss
 .bg{
     background-color:$bg
 }
@@ -16,8 +16,7 @@
 ```
 
 ## 嵌套书写
-
-```angular2html
+```scss
 //css 
 div p { background-color:red }
 
@@ -31,7 +30,7 @@ div{
 
 ## &符号表示父节点
 
-```angular2html
+```scss
 //scss
 div{
     p{
@@ -53,7 +52,7 @@ div.hover{ background-color:green }
 
 - 通过混入可以把一些样式单独提出来，当使用@minx时，通过@include 引入,并且可以传递参数
 
-```angular2html
+```scss
 
 @minx theme($color) {
     background-color:$color;
@@ -76,7 +75,7 @@ x2{
 
 - 使用mixin，如果 x1元素和@mixin theme拥有相同的样式，会出现冗余。  
 
-```angular2html
+```scss
 
 @mixin n {
     font-size:20px;
@@ -102,7 +101,7 @@ x2{
 
 - 定义基础类，被继承的子类，可以继承基础类，也可以覆盖父类
 
-```angular2html
+```scss
 //scss 
 //定义父类
 .n {

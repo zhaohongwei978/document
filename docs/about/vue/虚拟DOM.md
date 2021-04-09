@@ -6,7 +6,7 @@
 
 - 正常的 DOM 节点在 HTML 中是这样的：
 
-```
+```javascript
 <div id="main">
     <p>文本内容</p>
     <p>文本内容</p>
@@ -15,7 +15,7 @@
 
 - 用 Virtual Dom 创建的 JavaScript 对象一般会是这样的：
 
-```
+```javascript
 var vNode = {
     tag: 'div',
     attributes:{
@@ -31,7 +31,7 @@ var vNode = {
 
   每个 VNode 有 children，children 每个元素也是一个 VNode，这样就形成了一个 VNode Tree，它很好的描述了我们的 DOM Tree。
 
-```
+```javascript
 export interface VNode{
     tag?: string;
     data?: VNodeData;
