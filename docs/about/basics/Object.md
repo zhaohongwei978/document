@@ -1,8 +1,6 @@
 # Object
 
-
 ## Object.create
-
 
 Object.create 创建一个对象并把这个对象的 [[Prototype]] 关联到指定的对象。
 
