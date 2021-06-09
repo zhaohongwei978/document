@@ -84,10 +84,10 @@ module.exports = {
             'CSS',
             'VUE',
             'React',
-            'Wepback',
+            'WebPack',
             'Http',
-            // '常见考点',
             '性能优化',
+            '区块链',
           )
         }
       },
@@ -112,7 +112,7 @@ module.exports = {
 }
 
 
-function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,groupH,groupI) {
+function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,groupI,groupJ) {
   return [{
       title: groupA,
       collapsable: true,
@@ -157,6 +157,11 @@ function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,g
       title: groupI,
       collapsable: true,
       children: ['/about/nature/节流防抖','/about/nature/性能优化总结']
-    }
+    },
+    {
+        title: groupJ,
+        collapsable: true,
+        children: ['/about/blockchain/truffle','/about/blockchain/web3']
+      }
   ]
 }
