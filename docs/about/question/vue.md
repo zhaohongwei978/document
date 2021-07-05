@@ -178,14 +178,54 @@ o(n3次方) 降低到O(n) 并描述diff算法过程
 - 异步渲染 (以及合并data修改)，以提高渲染性能。
 - $nextTick在DOM更新之后，触发回调。
 
-## v-for为什么不能和v-if一起使用？
-    因为在代码执行的时候，v-if会优先执行 每次循环都会进行一次 v-if的判断很浪费性能。所以v-if和v-for同时存在时候。vue会报错。
-    正确应该在v-for外层嵌套div进行v-for的判断。
-    如果一个list内部的某些flag需要判断应该如何做，可以通过computed把需要展示的数据做过滤。
-    避免list循环内部v-if的判断。
+##  v-if 和 v-for 同时用在同一个元素上？
+  
 
 ```html
-    <div v-for="item in list" v-if="">
+    <div v-for="item in list" v-if="active">
+```
+因为在代码执行的时候，v-for会优先执行，带来性能方面的浪费（每次渲染都会先循环再进行条件判断）
+
+- 解决方法1 
+```vue
+<template v-if="isShow">
+  <p v-for="item in items">
+</template>
+```
+- 解决方法2
+```vue
+<script>
+    export default {
+        computed items(){
+            return this.list.filter((item)=>{
+                return this.active
+            })
+        }
+    }
+</script>
+```
+## js判断一个对象是空对象?
+
+```javascript
+//方法1  
+JSON.stringify({}) === '{}' //true
+
+//方法2通过Object.entries({})
+Object.entries({}).length!==0;
+
+//方法3 for in循环
+let obj  = {};
+let flag = function(){
+    for(let key in obj){
+       return false
+    }
+    return true
+}
+
+//方法4 Object.keys
+let obj = {};
+Object.keys(obj).length  === 0;
+
 ```
 
 ## vue中为什么data被设计为函数?
@@ -213,7 +253,7 @@ MyPlugin.install = function(Vue,options){
     //mixin
     Vue.mixin({
         create(){
-            console.log('公共mouted')
+            console.log('公共mounted')
         }
     })
 }

@@ -82,7 +82,8 @@ module.exports = {
             'JS基础',
             'Node',
             'CSS',
-            'VUE',
+            'Vue2',
+            'Vue3',
             'React',
             'WebPack',
             'Http',
@@ -112,7 +113,7 @@ module.exports = {
 }
 
 
-function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,groupI,groupJ) {
+function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE,groupF, groupG,groupI,groupJ,groupK) {
   return [{
       title: groupA,
       collapsable: true,
@@ -131,20 +132,25 @@ function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,g
     {
       title: groupD,
       collapsable: true,
-      children: ['/about/vue/newVue时候都做了什么','/about/vue/vue实例挂载','/about/vue/render函数','/about/vue/虚拟DOM','/about/vue/update','/about/vue/watch实现','/about/vue/nextTick','/about/vue/路由原理','/about/vue/生命周期', '/about/vue/自定义model','/about/vue/响应式observe','/about/vue/模版渲染','/about/vue/组件通信','/about/vue/vue3']
+      children: ['/about/vue/newVue时候都做了什么','/about/vue/vue实例挂载','/about/vue/render函数','/about/vue/虚拟DOM','/about/vue/update','/about/vue/watch实现','/about/vue/nextTick','/about/vue/路由原理','/about/vue/生命周期', '/about/vue/自定义model','/about/vue/响应式系统','/about/vue/模版渲染','/about/vue/组件通信','/about/vue/vue3']
     },
     {
-      title: groupE,
-      collapsable: true,
-      children: ['/about/react/react',]
+        title: groupE,
+        collapsable: true,
+        children: ['/about/vue3/基本使用','/about/vue3/响应式系统']
     },
     {
       title: groupF,
       collapsable: true,
-      children: ['/about/webpack/webpack配置',]
+      children: ['/about/react/react',]
     },
     {
       title: groupG,
+      collapsable: true,
+      children: ['/about/webpack/webpack配置',]
+    },
+    {
+      title: groupI,
       collapsable: true,
       children: [ '/about/http/HTTP基础知识', '/about/http/缓存','/about/http/web安全']
     },
@@ -154,14 +160,14 @@ function getBasicsSidebar(groupA, groupB, groupC, groupD,groupE, groupF,groupG,g
     //   children: ['/about/question/vue','/about/question/js','/about/question/移动端问题']
     // },
     {
-      title: groupI,
+      title: groupJ,
       collapsable: true,
       children: ['/about/nature/节流防抖','/about/nature/性能优化总结']
     },
     {
-        title: groupJ,
+        title: groupK,
         collapsable: true,
         children: ['/about/blockchain/truffle','/about/blockchain/web3']
-      }
+    }
   ]
 }
