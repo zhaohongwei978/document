@@ -74,7 +74,19 @@ module.exports ={
 //输出结果 在dist目录下会生成file1.js 和 file2.js两个文件 
 
 ```
+## devServer相关
 
+```json
+devServer:{
+    //额外静态资源目录(默认开发模式 只有dist是静态资源目录)
+    contentBase:path.resolve('public'),
+    compress:true,//是否启用压缩gzip
+    //webpack serve 启用的端口
+    port:8888,
+    //webpack serve 运行自动打开网页
+    open: true
+},
+```
 ## loader相关
 
 ### 常用loader
@@ -149,9 +161,8 @@ ReactDOM.render(
 
 作用
 
-- css-loader 用于加载.css文件，并转换为commonjs对象
-- style-loader 将css插入到head中
-
+- style-loader  用于加载.css文件，并转换为commonjs对象,将css插入到head中
+- css-loader 解析css中url() 和 import
 - 1 npm i style-loader css-loader -d
 - 2 loader解析scss
 
@@ -168,6 +179,28 @@ module:{
             use: ['style-loader','css-loader','sass-loader']
         }]
     }
+
+module:{
+        rules:[
+            {
+                test:/\.txt$/,
+                use:'raw-loader'
+            },
+            {
+                test:/\.css$/,
+                use:[
+                    'style-loader',//css转换为js
+                    {
+                        loader:'css-loader',//解析 url import
+                        options:{
+                            importLoaders:1
+                        },
+                    },
+                    'sass-loader'
+                ]
+            }
+        ]
+    },
 ```
 
 ### file-loader相关

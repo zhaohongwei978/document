@@ -5,9 +5,10 @@
         "D": "bash deploy.sh"
     },
     "devDependencies": {
-        "vuepress": "^1.2.0",
+        "file-loader": "^3.0.1",
         "node-sass": "^4.12.0",
-        "sass-loader": "^8.0.0"
+        "sass-loader": "^8.0.0",
+        "vuepress": "^1.2.0"
     },
     "dependencies": {
         "@vuepress/plugin-back-to-top": "^1.2.0",
