@@ -206,6 +206,7 @@ module:{
 ### file-loader相关
 
 - 通过使用file-loader可以解析 png jpg gif svg等的解析。用file-loader打包的图片会给每张图片都生成一个随机的hash值作为图片的名字,并可以通过outputPath参数指定其所打包后存放的位置。
+- 项目中如果想要const img = require('./assets/test.png')，就需要用到file-loader解析
 
 使用过程
 
@@ -220,12 +221,15 @@ name配置项是配置打包生成的文件的名字，使用的是placeholder�
     use:{
         loader:'file-loader',
         options:{
-            name:"[name]_[hash:6].[ext]",
+            name:"[name]_[hash:10].[ext]",
             outputPath:"images/"
         }
     },
 }
-
+文件 hash生成的代码
+let crypto = require('crypto');
+let content = fs.readFileSync('demo.png');
+crypto.createHash('md5').update(content).digest('hex').slice(0,10);
 ```
 
 ### url-loader相关
