@@ -74,6 +74,39 @@ module.exports ={
 //输出结果 在dist目录下会生成file1.js 和 file2.js两个文件 
 
 ```
+## babel兼容的处理
+
+```json
+npm i babel-loader @babel/core @babel/preset-env @babel/preset-react -D
+npm i @babel/plugin-proposal-decorators @babel/plugin-proposal-class-properties -D
+
+转换过程
+ # babel-loader调用@babel/core
+ # @babel/core识别js代码，调用@babel/preset-env预设进行转换 
+
+转换配置
+module:{
+    rules:[
+        {
+            test:/\.js$/,
+            use:[
+                'babel-loader',
+                {
+                    options:{
+                        presets:[
+                            "@babel/preset-env","@babel/preset-react"
+                        ],
+                        plugins:[
+                            ["@babel/plugin-proposal-decorators",{legacy:true}],
+                            ["@babel/plugin-proposal-class-properties",{legacy:true}]
+                        ]
+                    }
+                }
+            ]
+        },
+    ]
+},
+```
 ## devServer相关
 
 ```json
@@ -369,12 +402,51 @@ npm i html-webpack-plugin -d
 ## source map
 
 推荐
+| 关键字  | 描述 |
+| ---  | ---  |
+| devtool: 'eval'  | build在生成的js文件中 通过eval包裹,(优势方便缓存，速度能快一些)  |
+| devtool: 'source-map'  | 会生成行 列的对应关系 生成main1.js 和 main1js.map文件 |
+| devtool: 'cheap-source-map'  | 会生成行 不包含列信息 生成main1.js 和 main1js.map文件,不包含babel-loader转换的代码 |
+| devtool: 'module-source-map' | 指包含babel-loader转译之后的那些信息 |
+| devtool: 'inline'| 把.map文件作为DataURL内嵌，不单独生成.map文件|
+
+- source-map和cheap-module-source-map的区别？
+
+    source-map能够定位到行 列的信息，并且包含经过babel-loader转换的代码
+
+    cheap-module-source-map只能够定位到行的信息，包含babel-loader转换的代码
+
+
+```json
+ devtool: 'eval',
+//生成的main1.js文件
+(() => { var __webpack_modules__ = { 966: () => { eval("var a = 1;\nconsole.log(a);\n\n//# sourceURL=webpack://webpack5/./src/index.js?") } }, __webpack_exports__ = {}; __webpack_modules__[966]() })();
 
 ```
-//eval 速度
-//souce-map 产生.map文件
-//cheap 比较快，但是不包含列信息（可以定位到行，但是不包含列）
+| 关键字  | 描述 |
+| ---  | ---  |
+| source-map  | 单独在外部生成完成的.map文件,能准确定位代码的行列信息 |
+| inline-source-map  | 内联在build的文件中以base64的形式生成.map文件,能准确定位代码的行列信息（内联构建速度能快一些）  |
+| eval-source-map | 会为每个模块单独生成一个source-map文件，使用eval执行 |
+| cheap-source-map | 外部生成source-map,不包含列信息，不包含loader的map |
+| cheap-module-source-map| 在外部生成source-map,不包含列，包含loader的map|
+| hidden-source-map| 生成source-map文件，但是不跟原文件关联|
+| devTool:false|  不生成source-map文件|
+在开发环境中
 
+-eval-cheap-source-map 重复构建有缓存，速度最快，cheap不包含列的信息，只能定位到行
+
+-cheap-module-source-map 只能够定位到行的信息，包含babel-loader转换的代码
+
+-eval-source-map 包含行和列的信息，重复构建速度快（以上2种折中方法）
+
+在生产环境中
+（肯定要排查inline 减少源代码的体积）
+调试友好 source-map > cheap-source-map > cheap-module-source-map >
+速度更快 选择 cheap
+
+
+```
  //开发环境
  devtool:"cheap-module-eval-source-map"
  //生产环境
