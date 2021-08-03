@@ -1,13 +1,15 @@
 # promise
+## 关键点
+- 1 promise状态只允许改变一次
+- 2 发布订阅模式解决，异步场景改变resolve/reject状态,执行不到.then
+- 3 链式回调问题，通过让.then返回一个全新的promise对象来解决链式回调
 
 
-## promise 实现思路
+### 一 标志位只能改变一次
 
-
-### 步骤一 简单版本
 - new Promise 时候 让excutor执行，传如一个成功resolve方法，一个reject方法。
 - 通过这两个方法改变，reason和val的值。和padding的状态。
-- padding状态只能改变一次。
+- 关键点 relsove 和 reject的执行需要判断 当前是PENDING状态。
 ```javascript
 const PADDING = 'PADDING';
 const RESOLVE = 'RESOLVE';
@@ -49,9 +51,10 @@ class promise{
     }
 }
 ```
-## 步骤二 发布订阅模式（异步的场景）
-- 通过setTimeOut(function(){ resolve('success') })模拟异步，此时的then方法中status状态为 padding。
-- 通过发布订阅的模式，把成功的回调和失败的回调分别放在各自数组中。
+### 二 发布订阅
+
+
+通过setTimeOut(function(){ resolve('success') })模拟异步，此时的then方法中status状态为 PENDING。如果.then中状态为PENDING，把成功和失败的会调函数fn都放在一个数组中，当执行reove/reject方法时，让数组中的fn批量执行。
 
 ```javascript
 class myPromise {
@@ -109,12 +112,22 @@ class myPromise {
     }
 }
 ```
-### 步骤三 链式调用
-- 下一个回调是否调用，依赖于上一个promise的返回结果（成功或失败）。
+### 三 链式调用
+
+链式回调问题主要通过在.then中返回一个全新的Promise。
+（必须是全新的promise，因为如果返回this，此时的promise状态已经被改变，所以不能继续使用）
+
+.then返回的几种情况
+- 1 返回一个成功/失败的promise对象，下一个then根据promise状态接收
+- 2 返回一个普通值，下一个then根据成功的状态接收
+- 3 如果抛出错误 下一个then根据失败的状态接收
+
+<!-- - 下一个回调是否调用，依赖于上一个promise的返回结果（成功或失败）。
 - 假设如果返回underfind则也会相当于一个成功的promise。
 - 假设如果返回throw Error则会返回失败的promise。
 - 假设如果return new Promise(function(){})返回空的promise则可以不走成功或者失败的回调，返回一个padding的Promise.
-- 每次执行promise都会返回一个新的promise。
+- 每次执行promise都会返回一个新的promise。 -->
+
 
 
 
