@@ -1,15 +1,17 @@
 # promise
+
 ## 关键点
+
 - 1 promise状态只允许改变一次
 - 2 发布订阅模式解决，异步场景改变resolve/reject状态,执行不到.then
 - 3 链式回调问题，通过让.then返回一个全新的promise对象来解决链式回调
-
 
 ### 一 标志位只能改变一次
 
 - new Promise 时候 让excutor执行，传如一个成功resolve方法，一个reject方法。
 - 通过这两个方法改变，reason和val的值。和padding的状态。
 - 关键点 relsove 和 reject的执行需要判断 当前是PENDING状态。
+
 ```javascript
 const PADDING = 'PADDING';
 const RESOLVE = 'RESOLVE';
@@ -51,8 +53,8 @@ class promise{
     }
 }
 ```
-### 二 发布订阅
 
+### 二 发布订阅
 
 通过setTimeOut(function(){ resolve('success') })模拟异步，此时的then方法中status状态为 PENDING。如果.then中状态为PENDING，把成功和失败的会调函数fn都放在一个数组中，当执行reove/reject方法时，让数组中的fn批量执行。
 
@@ -112,12 +114,14 @@ class myPromise {
     }
 }
 ```
+
 ### 三 链式调用
 
 链式回调问题主要通过在.then中返回一个全新的Promise。
 （必须是全新的promise，因为如果返回this，此时的promise状态已经被改变，所以不能继续使用）
 
 .then返回的几种情况
+
 - 1 返回一个成功/失败的promise对象，下一个then根据promise状态接收
 - 2 返回一个普通值，下一个then根据成功的状态接收
 - 3 如果抛出错误 下一个then根据失败的状态接收
@@ -128,11 +132,9 @@ class myPromise {
 - 假设如果return new Promise(function(){})返回空的promise则可以不走成功或者失败的回调，返回一个padding的Promise.
 - 每次执行promise都会返回一个新的promise。 -->
 
-
-
-
 - 根据上一个promise的返回结果x，如果x是一个promise调用then。
 - 如果x是一个普通的值或者underfind则返回promise一个新的promise。
+
 ```javascript
 
 const PADDING = 'PADDING';
@@ -263,7 +265,7 @@ Promise.resolve().then(()=>{
 
 - 执行async函数，返回的是Promise对象
 - await 相当于 Promise的then
-- try...catch可以捕获异常,代替来Promise.catch 
+- try...catch可以捕获异常,代替来Promise.catch
 - await后面的内容都是异步的内容
 
 ```javascript
@@ -284,8 +286,6 @@ async function fn2(){
     console.log(data) // 可以打印出300，await相当于 Promise.then的回调
 }
 ```
-
-
 
 ```
 async function fn2(){
@@ -314,7 +314,6 @@ async function fn4{
 }
 ```
 
-
 ```javascript
 async function async1(){
     console.log('fn start')
@@ -339,10 +338,41 @@ fn end
 
 ```
 
-
-### 场景题分析 
+### 场景题分析
 
 ```javascript
+// 红灯三秒亮一次，绿灯一秒亮一次，黄灯2秒亮一次；如何让三个灯不断交替重复亮灯？（用Promise实现）
+function red(){
+    console.log('red');
+}
+function green(){
+    console.log('green');
+}
+function yellow(){
+    console.log('yellow');
+}
+
+function run (callback,delay){
+    return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+    resolve('run');
+    callback();
+    },delay)
+    })
+}
+function fn(){
+    Promise.resolve().then(()=>{
+    return run(red,3000)
+    }).then(()=>{
+    return run(green,2000)
+    }).then(()=>{
+    return run(yellow,1000)
+    }).then(()=>{
+        fn();
+    })
+}
+fn();
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 async function fn(){
     return 100
 }
@@ -403,12 +433,10 @@ process.nextTick(function tick () {
 
 ```
 
-
 ## promise.all()使用
 
 Promise.all获得的成功结果的数组里面的数据顺序和Promise.all接收到的数组顺序是一致的即p1的结果在前，即便p1的结果获取的比p2要晚。这带来了一个绝大的好处：在前端开发请求数据的过程中，偶尔会遇到发送多个请求并根据请求顺序获取和使用数据的场景，使用Promise.all毫无疑问可以解决这个问题。
-                                              
-                                              
+
 - 处理多个promise的状态，当p1，p2都成功时，返回的是 [p1,p2].
 - 当p1,p2有一个失败时候，走的是catch 方法，返回的值是第一个reject的值。
 
@@ -429,6 +457,7 @@ Promise.all([p1, p2]).then((result) => {
     console.log('err',error)
 })
 ```
+
 ## promise.all()实现
 
 ```javascript
@@ -459,11 +488,9 @@ Promise.myAll([promise1,promise2]).then((res)=>{
 
 ```
 
-
 ## Promise.race()
 
 Promse.race就是赛跑的意思，意思就是说，Promise.race([p1, p2, p3])里面哪个结果获得的快，就返回那个结果，不管结果本身是成功状态还是失败状态。
-
 
 ```javascript
 let p1 = new Promise((resolve, reject) => {
@@ -486,7 +513,6 @@ Promise.race([p1, p2]).then((result) => {
 
 ```
 
-
 ## Promise.race()实现
 
 ```javascript
@@ -504,3 +530,32 @@ Promise.myRace = function (promiseArr){
 }
 
 ```
+
+## promisify 
+
+把一个普通的函数包装成promisify对象
+```javascript
+const fs = require('fs');
+function promisify (original){
+    return function(...args){
+        return new Promise((resolve, reject) => {
+            // 将 arguments 里面新增一个 original 的 callback，用来改变 promise 的状态
+            args.push(function callback(err, ...values) {
+                console.log('args',err,...values)
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(...values)
+            });
+            console.log('---args',args)
+           //  执行原函数(args 已经新增了 callback 了)
+            original.call(this, ...args);
+        });
+    }
+}
+const readFile = promisify(fs.readFile)
+readFile('./test.js').then(()=>{
+    console.log('fff')
+})
+```
+
