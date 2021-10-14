@@ -2,6 +2,35 @@
 
 JSBridge 就是JavaScript(H5)与Native通信的桥梁，在H5开发中经常有操作Native的需求，Native(安卓 ISO window...)过JSBridge与Native通信，赋予了JavaScript操作Native的能力，同时也给了Native调用JavaScript的能力。
 
+## 通信方式
+### 1 原生注入API法
+
+通过 WebView 提供的接口，向 JavaScript 的 Context（window）中注入对象或者方法
+```js
+// 前端调用方式
+window.postBridge(message); 
+```
+### 2 拦截Url Scheme 
+
+web 端通过某种方式（例如 iframe.src）发送 URL Scheme 请求，之后 Native 拦截到请求并根据 URL SCHEME（包括所带的参数）进行相关操作。 
+
+缺点：iframe.src 发送 URL scheme 会有 url 长度的隐患。 创建请求，需要一定的耗时，比注入 API 的方式调用同样的功能，耗时会较长。
+
+![QQ截图20200128111606.png](../../images/bridge01.png)
+
+```js
+function loadURL(url) { 
+    var iFrame; iFrame = document.createElement("iframe");
+    iFrame.setAttribute("src", url); iFrame.setAttribute("style", "display:none;"); 
+    iFrame.setAttribute("height", "0px"); iFrame.setAttribute("width", "0px"); 
+    iFrame.setAttribute("frameborder", "0");
+    document.body.appendChild(iFrame); 
+    // 发起请求后这个iFrame就没用了，所以把它从dom上移除掉 
+    iFrame.parentNode.removeChild(iFrame); iFrame = null; 
+} 
+loadURL("esales://ShowPicker"); 
+```
+
 ## android端开启bridge关键代码
 
 ```java
