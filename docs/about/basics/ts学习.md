@@ -2,7 +2,7 @@
 
 ## 静态类型语言 vs 动态类型语言
 
-- 静态类型语言： 在编译阶段确定所有变量的类型
+<!-- - 静态类型语言： 在编译阶段确定所有变量的类型
 - 动态类型语言: 在执行阶段确定所有变量的类型
 
 静态类型语言
@@ -20,32 +20,84 @@
 - 对类型比较宽松
 - bug 隐藏时间长
 - 可读性差
-- 动态语言性能可以改善 语言灵活度高 隐秘的错误可以通过单元测试发现 文档可以通过工具生成。
+- 动态语言性能可以改善 语言灵活度高 隐秘的错误可以通过单元测试发现 文档可以通过工具生成。 -->
 
 ## 使用 ts
 
 - 1 npm i typescript -g 全局安装 ts
 - 2 tsc --init 创建 tsconfig.json 文件。
 
-### 原始数据类型
+```ts
 
-- let bool:boolean = true
-- let num:number = 123
-- let str:string = "123"
+//原始数据类型
+let bool:boolean = true
+let num:number = 123
+let str:string = "123"
+let test:string|number = '123'//联合类型
 
-### 数组
-
-- let arr1:number[] = [1,2,3]
-- let arr2:Array<number|string> = [1,2,'3']
-
-### 元组 不能改变数据类型和个数
-
-```javascript
+//元组 不能改变数据类型和个数
 let tuple:[number,string] = [1,'2']
 tuple.push(3)
 //虽然元组可以往里push元素，但是在实际的开发过程中是不建议这么操作的，并且push进去的值 不允许访问。
 console.log(tuple) //打印结果[1,'2',3]
 tuple[2] // 报错 push进去的值不允许访问
+//枚举
+enum USER_INFO{
+    USER_NAME = "zhangsan",
+    USER_AGE = 14
+}
+
+// interface 用来描述对象形状
+
+let company:Company = {
+    name: 'zhangsan',
+    address: "beijing",
+    num: 10,
+}
+interface Group extends Company{
+    groupName:'',
+    groupNum:13
+}
+let group:Group = {
+    groupName: "",
+    groupNum: 13,
+    name: "",
+    address: "",
+    num: 0
+}
+let group:Group = {
+    groupName: "",
+    groupNum: 13,
+    name: "",
+    address: "",
+    num: 0,
+    money:1000
+}
+
+//type是类型一般在定义联合类型或者定义类型的别名
+interface Group{
+    name:'111'
+}
+//type实现继承
+type Info = Group & {
+    age:20
+}
+
+
+```
+
+
+
+### 
+
+- let arr1:number[] = [1,2,3]
+- let arr2:Array<number|string> = [1,2,'3']
+
+
+### 
+
+```javascript
+
 ```
 
 //函数

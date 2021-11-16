@@ -1,6 +1,95 @@
 # webpack配置
 
-## webpack 打包后的内容简单版
+## module chunk bundle区别
+
+```
+//文件结构
+src/
+├── index.css
+├── index.html  //  这个是 HTML 模板代码
+├── index.js
+├── common.js
+└── utils.js
+```
+```css
+//index.css
+body {
+    background-color: red;
+}
+```
+
+```js
+//utils.js
+export function square(x) {
+    return x * x;
+}
+```
+
+```js
+//common.js
+export function log(x) {
+    console.log(x)
+}
+```
+```js
+//index.js代码，引用了index.css common.js
+import './index.css';
+const { log } = require('./common');
+log('webpack');
+```
+```js
+{
+    entry: {
+        index: "../src/index.js",
+        utils: '../src/utils.js',
+    },
+    output: {
+        filename: "[name].bundle.js", // 输出 index.js 和 utils.js
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader, // 创建一个 link 标签
+                    'css-loader', // css-loader 负责解析 CSS 代码, 处理 CSS 中的依赖
+                ],
+            },
+        ]
+    }
+    plugins: [
+        // 用 MiniCssExtractPlugin 抽离出 css 文件，以 link 标签的形式引入样式文件
+        new MiniCssExtractPlugin({
+            filename: 'index.bundle.css' // 输出的 css 文件名为 index.css
+        }),
+    ]
+}
+```
+
+打包后的输出结果如下：
+
+1 index.css 和 common.js 在 index.js 中被引入。打包后都属于chunk0 ，utils.js单独打包构成chunk1.
+
+2 我们书写的每个源文件（ js css等）称为一个module
+
+3 webpack 处理好 chunk 文件后，最后会输出 bundle 文件，这个 bundle 文件包含了经过加载和编译的最终源文件，所以它可以直接在浏览器中运行。
+
+一般来说一个 chunk 对应一个 bundle，该配置正常生成 index.bundle.js 和 utils.bundle.js。但是 通过MiniCssExtractPlugin插件把index.css在chunk0中提出来了。所以最后应该是 
+
+utils.bundle.js
+index.bundle.js
+index.buidlel.css
+
+
+module，chunk 和 bundle 其实就是同一份逻辑代码在不同转换场景下的取了三个名字。
+
+直接写出来的是 module，webpack 处理时是 chunk，
+
+最后生成浏览器可以直接运行的 bundle。
+
+![QQ截图20200128111606.png](../../images/webpack001.png)
+
+## 打包后的内容简单版
 
 - 1 新建a.js 和 b点js两个页面
 - 2 在a.js中引入b.js的某个模块并输出，
