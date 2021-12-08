@@ -1,4 +1,19 @@
 # vue相关
+ 
+
+## 通过伪元素扩大点击区域
+通过伪元素设置四周内边距为负值，好处是不影响页面布局 样式 和定位。
+```css
+.close{
+    content:'',
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    bottom:-10px;
+    left:-10px;
+}
+
+```
 
 ## v-show && v-if区别？
 

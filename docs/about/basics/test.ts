@@ -6,6 +6,8 @@ const arr2: Array<string|number> = [1,2,3,4,'5']
 console.log('--',arr2)
 
 
+['ruleForm1'].include(ruleForm) && this.add1();
+
 interface Company{
     name:string,
     address:string,

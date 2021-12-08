@@ -89,6 +89,18 @@ module，chunk 和 bundle 其实就是同一份逻辑代码在不同转换场景
 
 ![QQ截图20200128111606.png](../../images/webpack001.png)
 
+## hash contenthash chunkhash
+
+
+| 标题 | 描述 |
+| ----| ---- |
+| hash|   hash是整个项目的hash值，根据每次编译后的内容计划生成，每次编译任何文件的修改都会导致hash值的变化|
+| chunkhash|   chunk模块内的hash，chunk模块内的代码有改动 hash值变化|
+| contenthash|   单个文件根据content决定hash值变化|
+
+
+
+
 ## 打包后的内容简单版
 
 - 1 新建a.js 和 b点js两个页面
