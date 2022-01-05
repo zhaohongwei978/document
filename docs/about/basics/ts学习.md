@@ -86,15 +86,9 @@ type Info = Group & {
 
 ```
 
-
-
-### 
-
 - let arr1:number[] = [1,2,3]
 - let arr2:Array<number|string> = [1,2,'3']
 
-
-### 
 
 ```javascript
 
