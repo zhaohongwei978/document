@@ -47,6 +47,43 @@ var myObject = Object.create( anotherObject );
 myObject.a; // 2 实际上就是把a:2 挂载到了myObject上
 ```
 
+
+### Object.create的简单实现 
+
+```js
+
+//方法1 
+Object.create1 = function (proto){
+     if (typeof proto !== "object" && typeof proto !== "function") {
+        // 类型校验
+        throw new TypeError("proto必须为对象或者函数");
+    } else if (proto === null) {
+        // null 特殊处理
+        throw new Error("不支持传递null");
+    }
+
+    let obj = {};
+    //IE下兼容性不好.__proto__不推荐
+    obj.__proto__ = proto
+    return obj;
+}
+//方法2
+Object.create1 = function (proto){
+    if (typeof proto !== "object" && typeof proto !== "function") {
+        // 类型校验
+        throw new TypeError("proto必须为对象或者函数");
+    } else if (proto === null) {
+        // null 特殊处理
+        throw new Error("不支持传递null");
+    }
+    //构造函数
+    function F(){}
+    //更改prototype
+    F.prototype = proto;
+    //生成构造函数的实例
+    return new F();
+}
+```
 ### Object.create 一些问题
 
 ```javascript
