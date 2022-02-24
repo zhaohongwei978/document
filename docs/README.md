@@ -5,11 +5,11 @@ actionText: Come on →
 actionLink: /about/basics/事件流.html
 ---
 
-- 🔭 我在北京工作~ 25 岁（目标备战大厂）
+- 🔭 我在北京工作~
 - 🤔 博客地址：https://zhaohongwei978.github.io
 - 🌱 有一群快乐的小伙伴 喜欢 编程
 - 📫 wx：17640415849（同手机号）👈
-- 👯 目标 2020 年：努力达到 A++～
+- 👯 目标 2022 年：努力达到 A++～
 
 ---
 

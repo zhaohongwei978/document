@@ -329,6 +329,10 @@ time: new Date().getTime(),
 - setTimeOut 手动设置多少毫秒增加多少像素，requestAnimationFrame 自动控制.
   setTimeOut 手动设置时间来执行，如果手动设置 setTimeOut(fn,0)执行代码前等待的毫秒数为 0，但并不是立即执行的，这是因为 setTimeout 有一个最小执行时间。
 
+requestAnimationFrame 会把每一帧中所有的dom操作集中在一起，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说这个频率为每秒60帧。
+
+在隐藏或者不可见元素中，requestAnimationFrame将不会进行重绘或者回流。
+
 HTML5 标准规定了 setTimeout()的第二个参数的最小值（最短间隔）不得低于 4 毫秒。实际上可能为 4 毫秒后才事件推入任务队列。如果此时主线程不为空，也不会读取推出异步队列的 setTimeOut.
 
 执行效率问题
