@@ -621,3 +621,39 @@ function queryToJSON(){
 query()
 
 ```
+
+## querySectorAll 和 document.getElementById的区别
+
+- querySelector返回的都是NodeList对象（即文档节点的集合）
+- getElementsBy系列返回的是HTMLCollection（HTML元素的集合）
+
+区别：getElement获取的是动态集合，而querySelector获取的是静态集合；
+
+不管是对ul1或者ul2进行添加节点都是可以成功被渲染到页面中的，但是，当我们打印出ul1和ul2会发现，通过getElement获取的元素集合发生了改变(length值增加了2)，而querySelector获取的元素的length值是不变的；
+
+```js
+const ul1 = document.getElementsByTagName('ul');
+const ul2 = document.querySelectorAll('ul')
+ul1[0].appendChild(document.createElement('li'));
+ul2[0].appendChild(document.createElement('li'));
+console.log(li1.length);  // 6
+console.log(li2.length);  // 4
+```
+性能对比
+
+- getElement返回动态集合，是document的方法；性能较好
+- querySelector返回静态集合，是element的方法
+
+```js
+console.time('querySelectorAll');
+for (let i = 0; i < 1000; i++) {
+    document.querySelectorAll('li');
+}
+console.timeEnd('querySelectorAll');//querySelectorAll: 35.158935546875 ms
+console.time('getElementsByTagName');//getElementsByTagName: 0.18310546875 ms
+for (let i = 0; i < 1000; i++) {
+    document.getElementsByTagName('li');
+}
+console.timeEnd('getElementsByTagName');
+
+```
