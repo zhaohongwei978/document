@@ -62,6 +62,7 @@ function fn(name,age){
 }
 
 
+
 //方法2
 function myNew(constructor,...args){
     const obj = Object.create(constructor.prototype);
