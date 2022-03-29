@@ -126,3 +126,32 @@ function createLinkList(arr){
 }
 createLinkList([10,20,30,40,50])
 ```
+
+两数之和和为target
+
+```js
+function getTarget(arr,target){
+    const set = new Set();
+    for(let i = 0;i<arr.length;i++){
+        const item = arr[i];
+        if(set.has(target - item )){
+            return [arr.indexOf(target - item),i]
+        }
+        set.add(item);
+    }
+}
+
+function getTarget(arr,target){
+    const map = new Map();
+    for(let i = 0;i<arr.length;i++){
+        let cha = target - arr[i];
+        if(map.has(arr[i])){
+            return [map.get(arr[i]),i]
+        }
+        map.set(cha,i)
+    }
+}
+
+getTarget([1,2,3,2],4);
+
+```

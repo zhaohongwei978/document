@@ -165,22 +165,21 @@ c
 
 ### 深拷贝实现 merge
 
-```
+```js
 
 let a = { a: {age:25}, b: 2, c: {}}
 let b = { c: 3, a: { name: 'kira' },f: {} };
 
 
 function mergeDeep(a,b) {
-    for (key in b) {
-        if (a[key] && a[key].toString() === '[object Object]' ) {
+    for (let key in b) {
+        if (a[key] && String(a[key]) === '[object Object]' ) {
             mergeDeep(a[key],b[key])
         } else {
             a[key] = b[key];
         }
     }
 }
-
 mergeDeep(a, b)
 console.log('----a',a)
 

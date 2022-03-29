@@ -280,21 +280,21 @@ res.then((val)=>{
 
 ```
 
-```
+```js
 async function fn2(){
     const data = await Promise.resolve(3000)
     console.log(data) // 可以打印出300，await相当于 Promise.then的回调
 }
 ```
 
-```
+```js
 async function fn2(){
     const data = await 3000 //相当于Promise.resolve(3000)
     console.log(data) // 可以打印出300，await相当于 Promise.then的回调
 }
 ```
 
-```
+```js
 //try catch 相当于 Promise的catch
 
 async function fn3){
@@ -307,7 +307,7 @@ async function fn3){
 }
 ```
 
-```
+```js
 async function fn4{
     const res = await Promise.reject('error');
     console.log(res);// 此时的res不会被执行，因为await相当于Promise的then，当reject 时候会执行catch不会执行then，所以此时必须要通过try catch 捕获。
@@ -491,6 +491,7 @@ Promise.myAll([promise1,promise2]).then((res)=>{
 ## Promise.race()
 
 Promse.race就是赛跑的意思，意思就是说，Promise.race([p1, p2, p3])里面哪个结果获得的快，就返回那个结果，不管结果本身是成功状态还是失败状态。
+Promise.race的结果只参照第一个改变状态的Promise，第一个为成功它就成功，第一个失败它就跟着失败，非常冷酷无情。
 
 ```javascript
 let p1 = new Promise((resolve, reject) => {
@@ -557,5 +558,17 @@ const readFile = promisify(fs.readFile)
 readFile('./test.js').then(()=>{
     console.log('fff')
 })
+
+
+function instanceof (left,right){
+    let l = l.__proto__;
+    let r = r.prototype;
+    while(true){
+        if(l === r) return true;
+        if(l=== null) return false;
+        l = l.__proto__;
+    }
+}
 ```
+
 

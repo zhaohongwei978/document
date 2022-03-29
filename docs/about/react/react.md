@@ -65,6 +65,9 @@ render() {
 
 ## setState同步异步问题
 
+- setState在react上下文中是异步执行，并且会合并计算。
+- 但setState任何情况下本质是同步，只是React为了优化做成了异步的样子，（多次setState修改，只会一次DOM渲染）
+- 
 ### react的异步更新
 ```javascript
 myClick =()=>{
